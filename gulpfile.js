@@ -5,6 +5,9 @@ var react = require('react');
 var concat = require("concat");
 var fs = require("fs");
 var source = require('vinyl-source-stream');
+var uglify = require("gulp-uglify");
+var jshint = require('jshint');
+var jshintStylish = require('jshint-stylish');
 
 // var sourcemaps = require('gulp-sourcemaps');
 // var source = require('vinyl-source-stream');
@@ -33,7 +36,10 @@ gulp.task("js", function() {
 		debug: true
 	})
 		.transform("babelify", {presets: ["es2015", "react"]}).bundle()
+	// .pipe(jshint())
+	// .pipe(jshint.reporter(jshintStylish))
 	.pipe(source("bundle.js"))
+	// .pipe(uglify())
 	// .pipe(concat("bundle.js"))
 	.pipe(gulp.dest(path.dest))
 		// .pipe(fs.createWriteStream("bundle.js"));
